@@ -62,7 +62,7 @@ print "Shutting down the handle."
 cluster.shutdown()
 ```
 ## 问题
-如果写入文件到集群中，上述方法ioctx.write()不能够读入文件，一个很方便的方法是用[rados](http://docs.ceph.com/docs/firefly/man/8/rados/)命令，
+如果写入文件到集群中，上述方法中函数ioctx.write()好像不能够读入文件路径，一个很方便的方法是用[rados](http://docs.ceph.com/docs/firefly/man/8/rados/)命令，
 ```
 rados mkpool pool_name //创建名为pool_name的pool
 rados -p pool_name put object ceph.txt //把对象名为object的ceph.txt文件存入pool。
