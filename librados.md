@@ -55,16 +55,21 @@ print ioctx.read("hw")
 ```
 
 ## 关闭读写操作
+```
 print "\nClosing the connection."
 ioctx.close()
-
 print "Shutting down the handle."
 cluster.shutdown()
-
-##
-http://docs.ceph.com/docs/firefly/man/8/rados/
-直接用rados操作和hdfs一样方便。
+```
+## 问题
+如果写入文件到集群中，上述方法ioctx.write()不能够读入文件，一个很方便的方法是用[rados](http://docs.ceph.com/docs/firefly/man/8/rados/)命令，
+```
+rados mkpool pool_name //创建名为pool_name的pool
+rados -p pool_name put object ceph.txt //把对象名为object的ceph.txt文件存入pool。
+```
+Client与集群建立连接后，就可以直接用rados进行读写操作，和hdfs一样方便。
 
 ##参考
  - [http://docs.ceph.com/docs/master/architecture/]()
  - [http://docs.ceph.com/docs/master/rados/api/librados-intro/]()
+ - [http://docs.ceph.com/docs/firefly/man/8/rados/]()
